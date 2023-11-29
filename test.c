@@ -19,7 +19,7 @@ char *find_path(char *command)
     {
         if ((strncmp(environ[i], "PATH=", 5)) == 0)
         {
-            path = strdup(environ[i] + 5);
+            path = environ[i] + 5;
         }
         i++;
     }
