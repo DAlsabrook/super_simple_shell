@@ -6,13 +6,11 @@
  *
  * Return: copied sting
  */
-char *_strcpy(char *dest, char *src)
+char *_strncpy(char *dest, char *src, int num)
 {
 	int i;
-	int j;
 
-	j = _strlen(src);
-	for (i = 0; i <= j; i++)
+	for (i = 0; i <= num; i++)
 	{
 		dest[i] = src[i];
 	}
