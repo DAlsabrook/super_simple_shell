@@ -27,35 +27,34 @@ char *get_path_var(char* command)
 
 char **tokenize_path(char *path)
 {
-	int i = 0, count = 0;
-	char *tmpToken, **tokenArray;
-
-	while (path[i])
-	{
-		if (path[i] == ':')
-			count++;
-		i++;
-	}
-	tokenArray = malloc(sizeof(char *) * (count + 1));
-	tmpToken = strtok(path, ":");
-	i = 0;
-	while (tmpToken)
-	{
-		tokenArray[i] = strdup(tmpToken);
-		tmpToken = strtok(NULL, ":");
-		i++;
-	}
-	return (tokenArray);
+    int i = 0, count = 0;
+    char *tmpToken, **tokenArray;
+    while (path[i])
+    {
+        if (path[i] == ':')
+            count++;
+        i++;
+    }
+    tokenArray = malloc(sizeof(char *) * (count + 1));
+    tmpToken = strtok(path, ":");
+    i = 0;
+    while (tmpToken)
+    {
+        tokenArray[i] = strdup(tmpToken);
+        tmpToken = strtok(NULL, ":");
+        i++;
+    }
+    return (tokenArray);
 }
 
 char *find_path(char *command)
 {
     struct stat fileInfo;    
-    char *path, *tokenArray[20], *catToken;
+    char *path = NULL, **tokenArray, *catToken;
     int i = 0;
 
     path = get_path_var(command);
-    tokenize_path(path);
+    tokenArray = tokenize_path(path);
 
     while (tokenArray[i])
     {
