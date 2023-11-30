@@ -6,7 +6,9 @@
 #include <stdlib.h>
 
 extern char **environ;
-
+/*
+ * get_path_var
+ */
 char *get_path_var(char* command)
 {
     char *path = NULL;
@@ -24,7 +26,9 @@ char *get_path_var(char* command)
     }
     return (path);
 }
-
+/*
+ * tokenize_path
+ */
 char **tokenize_path(char *path)
 {
     int i = 0, count = 0;
@@ -48,7 +52,23 @@ char **tokenize_path(char *path)
     }
     return (tokenArray);
 }
+/*
+ * free_array
+ */
+void free_array(char **array)
+{
+	int i = 0;
 
+	while (array[i])
+        {
+                free(array[i]);
+                i++;
+        }
+        free(array);
+}
+/*
+ * find_path
+ */
 char *find_path(char *command)
 {
     struct stat fileInfo;    
@@ -75,31 +95,27 @@ char *find_path(char *command)
         strcat(catToken, command);
         if (stat(catToken, &fileInfo) == 0)
         {
-	    i = 0;
-	    while (tokenArray[i])
-	    {
-	    	free(tokenArray[i]);
-		i++;
-	    }
-	    free(tokenArray);
+	    free_array(tokenArray);
             return (catToken);
         }
         i++;
 	free(catToken);
     }
-    free(catToken);
-    free(tokenArray);
+    free_array(tokenArray);
     printf("No such file or directory\n");
     return (NULL);
 }
-
+/*
+ * -caller MUST free find_path's return
+ */
 int main()
 {
   char *path;
   char *command;
   command = "ls";
   path = find_path(command);
-  printf("Path found: %s\n", path);
+  if (path)
+  	printf("Path found: %s\n", path);
   free(path);
   return 0;
 }
