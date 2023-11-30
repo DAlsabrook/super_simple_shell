@@ -110,6 +110,7 @@ char *find_path(char *command)
  */
 int main()
 {
+  int i = 0;
   char *path;
   char *command;
   command = "ls";
