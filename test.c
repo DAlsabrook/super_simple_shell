@@ -36,23 +36,23 @@ char *find_path(char *command)
     
     while (tokenArray[i])
     {
-        catToken = malloc(strlen(tokenArray[i]) + strlen(command) + 2);
+        catToken = malloc(strlen(tokenArray[i]) + strlen(command) + 3);
 	if (!catToken)
 		return (NULL);
         strcpy(catToken, tokenArray[i]);
-        strcat(catToken, "/");
+	catToken[strlen(tokenArray[i])] = 47;
         strcat(catToken, command);
         if (stat(catToken, &fileInfo) == 0)
         {
             return (catToken);
         }
-        else
-            printf("No such file or directory");
         i++;
         free(catToken);
     }
+    printf("No such file or directory");
     return (NULL);
 }
+
 int main() 
 {
   char *path;
