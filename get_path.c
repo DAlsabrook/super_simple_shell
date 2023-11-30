@@ -75,10 +75,10 @@ char *find_path(char *command)
     char *path = NULL, **tokenArray, *catToken;
     int i = 0;
 
-    /*get the full path variable*/
+    /*get the full PATH variable*/
     path = get_path_var(command);
 
-    /*tokenize the path variable*/
+    /*tokenize the PATH variable*/
     tokenArray = tokenize_path(path);
 
     /*
