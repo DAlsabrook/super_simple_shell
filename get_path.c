@@ -39,7 +39,7 @@ char **tokenize_path(char *path)
             count++;
         i++;
     }
-    tokenArray = malloc(sizeof(char *) * (count + 1));
+    tokenArray = malloc(sizeof(char *) * (count + 2));
     if (!tokenArray)
 	    return (NULL);
     tmpToken = strtok(path, ":");
@@ -50,6 +50,7 @@ char **tokenize_path(char *path)
         tmpToken = strtok(NULL, ":");
         i++;
     }
+    tokenArray[i] = NULL;
     return (tokenArray);
 }
 /*
@@ -110,7 +111,6 @@ char *find_path(char *command)
  */
 int main()
 {
-  int i = 0;
   char *path;
   char *command;
   command = "ls";
