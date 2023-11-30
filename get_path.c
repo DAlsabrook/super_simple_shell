@@ -75,11 +75,17 @@ char *find_path(char *command)
         strcat(catToken, command);
         if (stat(catToken, &fileInfo) == 0)
         {
+	    i = 0;
+	    while (tokenArray[i])
+	    {
+	    	free(tokenArray[i]);
+		i++;
+	    }
 	    free(tokenArray);
             return (catToken);
         }
         i++;
-        free(catToken);
+	free(catToken);
     }
     free(catToken);
     free(tokenArray);
