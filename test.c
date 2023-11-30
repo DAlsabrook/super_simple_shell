@@ -40,7 +40,7 @@ char *find_path(char *command)
 	if (!catToken)
 		return (NULL);
         strcpy(catToken, tokenArray[i]);
-	catToken[strlen(tokenArray[i])] = 47;
+	strcat(catToken, "/");
         strcat(catToken, command);
         if (stat(catToken, &fileInfo) == 0)
         {
