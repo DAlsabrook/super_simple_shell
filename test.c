@@ -59,6 +59,6 @@ int main()
   char *command;
   command = "ls";
   path = find_path(command);
-  printf("Path found: %s", path);
+  printf("Path found: %s\n", path);
   return 0;
 }
